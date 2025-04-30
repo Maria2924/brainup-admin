@@ -2,7 +2,14 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Api\Auth\LoginController;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\ValidationException;
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+
+
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'user']);
+
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
