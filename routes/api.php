@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\ValidationException;
 
 
-
+// Auth Routes
 Route::post('/login', [LoginController::class, 'login']);
 
 Route::get('/user', function (Request $request) {
