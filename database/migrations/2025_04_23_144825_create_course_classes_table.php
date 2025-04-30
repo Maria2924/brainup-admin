@@ -14,9 +14,7 @@ return new class extends Migration
         Schema::create('course_classes', function (Blueprint $table) {
             $table->id();
             $table->bigInteger('course_id');
-            $table->string('section');
-            $table->string('year');
-            $table->bigInteger('department_id');
+            $table->bigInteger('class_id');
             $table->timestamps();
         });
     }
