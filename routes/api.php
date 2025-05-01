@@ -10,6 +10,6 @@ use Illuminate\Validation\ValidationException;
 // Auth Routes
 Route::post('/login', [LoginController::class, 'login']);
 
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
+Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'user']);
+
+Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
