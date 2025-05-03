@@ -11,9 +11,9 @@ class StudentsTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1, 20) as $index) {
+        foreach (range(1, 10) as $index) {
             DB::table('students')->insert([
-                'user_id' => $faker->numberBetween(1, 10),
+                'user_id' => $index + 11,
                 'student_id_no' => $faker->unique()->numberBetween(10000000, 99999999),
                 'class_id' => $faker->numberBetween(1, 15),
                 'year' => $faker->numberBetween(1, 4),

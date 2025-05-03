@@ -4,19 +4,19 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CourseClass extends Model
+class Subject extends Model
 {
     //
-    protected $table = 'course_classes';
+    protected $table = 'subjects';
 
     protected $fillable = [
-        'course_id',
-        'class_id',
+        'name',
+        'code',
     ];
 
-    public function course()
+    public function professor()
     {
-        return $this->belongsTo(Course::class);
+        return $this->belongsTo(Professor::class);
     }
 
     public function class()
