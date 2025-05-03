@@ -11,13 +11,17 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Classes() {
+interface StudentsData {
+    data: any[];
+}
+
+export default function Classes({ students }: { students: StudentsData }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Students" />
 
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <DataTable columns={columns} data={[]} />
+                <DataTable columns={columns} data={students.data} />
             </div>
         </AppLayout>
     );

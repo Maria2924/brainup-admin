@@ -4,8 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\StudentExtraCourse;
-use App\Models\StudentClassCourse;
+use App\Models\Classes as StudentClass;
 
 class Student extends Model
 {
@@ -43,5 +42,10 @@ class Student extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function class()
+    {
+        return $this->belongsTo(StudentClass::class, 'class_id');
+    }   
 
 }

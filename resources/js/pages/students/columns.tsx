@@ -1,6 +1,8 @@
 'use client';
 
+import { Button } from '@/components/ui/button';
 import { ColumnDef } from '@tanstack/react-table';
+import { ArrowUpDown, Edit, EyeIcon } from 'lucide-react';
 
 export type Payment = {
     name: string;
@@ -13,7 +15,14 @@ export type Payment = {
 export const columns: ColumnDef<Payment>[] = [
     {
         accessorKey: 'name',
-        header: 'Name',
+        header: ({ column }) => {
+            return (
+                <Button size="default" variant="ghost" onClick={() => column.toggleSorting(column.getIsSorted() === 'asc')}>
+                    Name
+                    <ArrowUpDown className="ml-0 h-4 w-4" />
+                </Button>
+            );
+        },
     },
     {
         accessorKey: 'email',
@@ -34,6 +43,15 @@ export const columns: ColumnDef<Payment>[] = [
     {
         accessorKey: 'action',
         header: 'Action',
-        cell: () => <button className="btn btn-primary">View</button>,
+        cell: () => (
+            <div className="flex items-center gap-2">
+                <button className="cursor-pointer rounded-md bg-gray-200 p-1.5">
+                    <EyeIcon size={14} />
+                </button>
+                <button className="cursor-pointer rounded-md bg-gray-200 p-1.5">
+                    <Edit size={14} />
+                </button>
+            </div>
+        ),
     },
 ];

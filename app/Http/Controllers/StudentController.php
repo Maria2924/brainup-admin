@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\StudentResource;
 use App\Models\Student;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,11 @@ class StudentController extends Controller
      */
     public function index()
     {
-        return Inertia::render('students/students');
+        $students = Student::with(['class', 'user'])->get();
+
+        return Inertia::render('students/students', [
+            'students' => StudentResource::collection($students),
+        ]);
     }
 
     /**
