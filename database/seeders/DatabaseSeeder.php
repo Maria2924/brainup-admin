@@ -36,7 +36,7 @@ class DatabaseSeeder extends Seeder
             ClassesTableSeeder::class,
             SubjectsTableSeeder::class,
             SubjectModulesTableSeeder::class,
-            // // SubjectActivitiesTableSeeder::class,
+            SubjectActivitiesTableSeeder::class,
             // SubjectProfessorsTableSeeder::class,
             ClassSubjectsTableSeeder::class,
             StudentExtraSubjectsTableSeeder::class,
