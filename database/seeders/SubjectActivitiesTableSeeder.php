@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Faker\Factory as Faker;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
-use App\Models\SubjectActivites;
+use App\Models\SubjectActivities;
 
 class SubjectActivitiesTableSeeder extends Seeder
 {
@@ -18,8 +18,10 @@ class SubjectActivitiesTableSeeder extends Seeder
         $data = [];
         foreach (range(1, 20) as $index) {
             $data[] = [
+                'subject_id' => $faker->numberBetween(1, 20),
                 'name' => $faker->unique()->word(5),
                 'code' => $faker->unique()->word(5),
+                'description' => $faker->sentence(10),
             ];
         }
         SubjectActivities::insert($data);
