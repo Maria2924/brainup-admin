@@ -3,9 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\Auth\LoginController;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\ValidationException;
-
+use App\Http\Controllers\Api\Student\StudentSubjectsController;
+use App\Http\Controllers\Api\Student\StudentExtraSubjectsController;
+use App\Http\Middleware\RoleMiddleware;
 
 // Auth Routes
 Route::post('/login', [LoginController::class, 'login']);
@@ -13,3 +13,9 @@ Route::post('/login', [LoginController::class, 'login']);
 Route::middleware('auth:sanctum')->get('/user', [LoginController::class, 'user']);
 
 Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'logout']);
+
+
+Route::middleware(['auth:sanctum', RoleMiddleware::class . ':student'])->group(function () {
+    Route::get('/student/subjects', [StudentSubjectsController::class, 'index']);
+    Route::get('/student/extra-subjects', [StudentExtraSubjectsController::class, 'index']);
+});

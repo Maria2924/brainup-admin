@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('subject_activity_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('subject_activity_id')->constrained('subject_activity')->cascadeOnDelete();
+            $table->foreignId('subject_activity_id')->constrained('subject_activities')->cascadeOnDelete();
             $table->string('question');
             $table->string('answer')->nullable();
             $table->string('file')->nullable();

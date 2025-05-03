@@ -14,7 +14,7 @@ class UsersTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1, 10) as $index) {
+        foreach (range(1, 20) as $index) {
             $email = $faker->unique()->safeEmail;
             // Ensure we don't use the admin email
             while ($email === 'admin@email.com') {
@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'status' => 'active',
-                'role' => Arr::random(['student', 'professor']),
+                'role' => $index <= 10 ? 'professor' : 'student',
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),

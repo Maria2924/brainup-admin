@@ -34,6 +34,12 @@ class DatabaseSeeder extends Seeder
             CoursesTableSeeder::class,
             CourseClassesTableSeeder::class,
             ClassesTableSeeder::class,
+            SubjectsTableSeeder::class,
+            SubjectModulesTableSeeder::class,
+            // // SubjectActivitiesTableSeeder::class,
+            // SubjectProfessorsTableSeeder::class,
+            ClassSubjectsTableSeeder::class,
+            StudentExtraSubjectsTableSeeder::class,
         ]);
     }
 }

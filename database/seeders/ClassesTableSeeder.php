@@ -11,7 +11,7 @@ class ClassesTableSeeder extends Seeder
     public function run()
     {
         $faker = Faker::create();
-        foreach (range(1, 15) as $index) {
+        foreach (range(1, 20) as $index) {
             DB::table('class')->insert([
                 'section_name' => $faker->randomElement(['Scrotum', 'Indium', 'Codemium', 'Dilithium', 'Xenon']),
                 'course_id' => $faker->numberBetween(1,5),
