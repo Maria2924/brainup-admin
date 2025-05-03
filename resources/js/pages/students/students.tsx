@@ -4,15 +4,15 @@ import { Head } from '@inertiajs/react';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Courses',
-        href: '/course',
+        title: 'Students',
+        href: '/students',
     },
 ];
 
-export default function Courses() {
+export default function Classes() {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Courses" />
+            <Head title="Students" />
         </AppLayout>
     );
 }
