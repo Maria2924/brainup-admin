@@ -40,6 +40,7 @@ class DatabaseSeeder extends Seeder
             // SubjectProfessorsTableSeeder::class,
             ClassSubjectsTableSeeder::class,
             StudentExtraSubjectsTableSeeder::class,
+            SubjectActivityQuestionsTableSeeder::class,
         ]);
     }
 }
