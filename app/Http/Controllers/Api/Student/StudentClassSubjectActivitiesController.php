@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SubjectActivities;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Api\Students\StudentClassSubjectActivitiesResource;
 
 class StudentClassSubjectActivitiesController extends Controller
 {
@@ -27,6 +28,6 @@ class StudentClassSubjectActivitiesController extends Controller
         }
         
         $student_class_subject_activities = SubjectActivities::where('subject_id', $request->subject_id)->get();
-        return response()->json($student_class_subject_activities);
+        return response()->json(StudentClassSubjectActivitiesResource::collection($student_class_subject_activities));
     }
 }

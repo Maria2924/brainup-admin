@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\SubjectModules;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\Api\Students\StudentSubjectModulesResource;
 
 class StudentSubjectModulesController extends Controller
 {
@@ -27,6 +28,6 @@ class StudentSubjectModulesController extends Controller
         }
         
         $student_class_subject_modules = SubjectModules::where('subject_id', $request->subject_id)->get();
-        return response()->json($student_class_subject_modules);
+        return response()->json(StudentSubjectModulesResource::collection($student_class_subject_modules));
     }
 }
