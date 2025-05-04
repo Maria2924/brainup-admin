@@ -17,8 +17,9 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { getYearLabel } from '@/helper/getYearLabel';
+import AddDepartment from '@/components/form/department/add-department';
+import DeleteDepartment from '@/components/form/department/delete-department';
+import EditDepartment from '@/components/form/department/edit-department';
 import { PlusSquare } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
@@ -29,6 +30,21 @@ interface DataTableProps<TData, TValue> {
 export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
+    const [open, setOpen] = React.useState(false);
+    const [editOpen, setEditOpen] = React.useState(false);
+    const [selectedDepartment, setSelectedDepartment] = React.useState<{ id: number; department_name: string } | null>(null);
+    const [deleteOpen, setDeleteOpen] = React.useState(false);
+    const [departmentToDelete, setDepartmentToDelete] = React.useState<{ id: number; department_name: string } | null>(null);
+
+    function handleEditDepartment(department: TData) {
+        setSelectedDepartment(department as { id: number; department_name: string });
+        setEditOpen(true);
+    }
+
+    function handleDeleteDepartment(department: TData) {
+        setDepartmentToDelete(department as { id: number; department_name: string });
+        setDeleteOpen(true);
+    }
 
     const table = useReactTable({
         data,
@@ -43,62 +59,24 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
             sorting,
             columnFilters,
         },
+        meta: {
+            handleEditDepartment,
+            handleDeleteDepartment,
+        },
     });
-
-    const classesOptions = React.useMemo(() => {
-        return [...new Set(data.map((row) => row.class))];
-    }, [data]);
-
-    const yearLevelOptions = React.useMemo(() => {
-        return [...new Set(data.map((row) => row.year))];
-    }, [data]);
 
     return (
         <div>
             <div className="flex items-center py-4">
                 <Input
-                    placeholder="Search students"
+                    placeholder="Search department"
                     value={table.getState().globalFilter ?? ''}
                     onChange={(event) => table.setGlobalFilter(event.target.value)}
                     className="max-w-sm"
                 />
 
-                <Select
-                    onValueChange={(value) => table.getColumn('class')?.setFilterValue(value === '__all__' ? undefined : value)}
-                    value={(table.getColumn('class')?.getFilterValue() as string) || '__all__'}
-                >
-                    <SelectTrigger className="ml-2 w-[150px]">
-                        <SelectValue placeholder="Filter class..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="__all__">All Class</SelectItem>
-                        {classesOptions.map((classes) => (
-                            <SelectItem key={classes} value={classes}>
-                                {classes}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-
-                <Select
-                    onValueChange={(value) => table.getColumn('year')?.setFilterValue(value === '__all__' ? undefined : value)}
-                    value={(table.getColumn('year')?.getFilterValue() as string) || '__all__'}
-                >
-                    <SelectTrigger className="ml-2 w-[150px]">
-                        <SelectValue placeholder="Filter year level..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="__all__">All Year Level</SelectItem>
-                        {yearLevelOptions.map((year) => (
-                            <SelectItem key={year} value={year}>
-                                {getYearLabel(year)}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
-
-                <Button variant="default" size="lg" className="ml-auto">
-                    <PlusSquare /> Add Student
+                <Button variant="default" size="lg" className="ml-auto" onClick={() => setOpen(true)}>
+                    <PlusSquare /> Add Department
                 </Button>
             </div>
             <div className="rounded-md border">
@@ -130,7 +108,7 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                         ) : (
                             <TableRow>
                                 <TableCell colSpan={columns.length} className="h-24 text-center">
-                                    No students results yet.
+                                    No departments results yet.
                                 </TableCell>
                             </TableRow>
                         )}
@@ -145,6 +123,15 @@ export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData
                     Next
                 </Button>
             </div>
+
+            <AddDepartment open={open} setOpen={setOpen} />
+            <EditDepartment editOpen={editOpen} setEditOpen={setEditOpen} department={selectedDepartment} />
+            <DeleteDepartment
+                deleteOpen={deleteOpen}
+                setDeleteOpen={setDeleteOpen}
+                departmentToDelete={departmentToDelete}
+                setDepartmentToDelete={setDepartmentToDelete}
+            />
         </div>
     );
 }

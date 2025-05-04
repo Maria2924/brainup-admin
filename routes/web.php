@@ -32,6 +32,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('departments')->group(function () {
         Route::get('/', [DepartmentController::class, 'index'])->name('departments.index');
+        Route::post('/store', [DepartmentController::class, 'store'])->name('departments.store');
+        Route::patch('/update/{department}', [DepartmentController::class, 'update'])->name('departments.update');
+        Route::delete('/destroy/{department}', [DepartmentController::class, 'destroy'])->name('departments.destroy');
     });
 
     Route::prefix('professors')->group(function () {
