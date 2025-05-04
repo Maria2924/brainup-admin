@@ -41,6 +41,7 @@ class DatabaseSeeder extends Seeder
             ClassSubjectsTableSeeder::class,
             StudentExtraSubjectsTableSeeder::class,
             SubjectActivityQuestionsTableSeeder::class,
+            StudentActivityAnswersTableSeeder::class,
         ]);
     }
 }
