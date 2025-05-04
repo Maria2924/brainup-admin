@@ -18,19 +18,25 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import AddCourse from '@/components/form/course/add-course';
+import EditCourse from '@/components/form/course/edit-course';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlusSquare } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    departments?: any[];
+    departments: any[];
 }
 
-export function DataTable<TData, TValue>({ columns, data, departments }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data, departments = [] }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [open, setOpen] = React.useState(false);
+
+    function handleEditCourse(course: TData) {
+        // Handle edit course logic here
+        console.log('Edit course:', course);
+    }
 
     const table = useReactTable({
         data,
@@ -44,6 +50,9 @@ export function DataTable<TData, TValue>({ columns, data, departments }: DataTab
         state: {
             sorting,
             columnFilters,
+        },
+        meta: {
+            handleEditCourse,
         },
     });
 
@@ -125,6 +134,7 @@ export function DataTable<TData, TValue>({ columns, data, departments }: DataTab
             </div>
 
             <AddCourse open={open} setOpen={setOpen} departments={departments} />
+            <EditCourse editOpen={false} setEditOpen={() => {}} />
         </div>
     );
 }

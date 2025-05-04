@@ -6,7 +6,7 @@ import { ArrowUpDown, Edit, Trash } from 'lucide-react';
 
 declare module '@tanstack/react-table' {
     interface TableMeta<TData> {
-        handleEditDepartment: (department: TData) => void;
+        handleEditCourse: (department: TData) => void;
         handleDeleteDepartment: (department: TData) => void;
     }
 }
@@ -48,7 +48,7 @@ export const columns: ColumnDef<Course>[] = [
         header: 'Action',
         cell: ({ row, table }) => (
             <div className="flex items-center gap-2">
-                <button className="cursor-pointer rounded-md bg-gray-200 p-1.5">
+                <button className="cursor-pointer rounded-md bg-gray-200 p-1.5" onClick={() => table.options.meta?.handleEditCourse(row.original)}>
                     <Edit size={14} />
                 </button>
                 <button className="cursor-pointer rounded-md bg-gray-200 p-1.5">
