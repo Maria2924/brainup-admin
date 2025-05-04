@@ -1,3 +1,4 @@
+import ToastHandler from '@/components/toast-handler';
 import AppLayout from '@/layouts/app-layout';
 import { MainLayout } from '@/layouts/main-layout';
 import { type BreadcrumbItem } from '@/types';
@@ -20,6 +21,8 @@ export default function Classes({ departments }: { departments: any[] }) {
             <MainLayout>
                 <DataTable columns={columns} data={departments} />
             </MainLayout>
+
+            <ToastHandler />
         </AppLayout>
     );
 }
