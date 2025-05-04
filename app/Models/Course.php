@@ -20,4 +20,9 @@ class Course extends Model
     {
         return $this->hasMany(Classes::class);
     }
+
+    public function department()
+    {
+        return $this->belongsTo(Department::class, 'department_id');
+    }
 }

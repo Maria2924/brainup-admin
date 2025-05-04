@@ -2,7 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Course\AddCourseRequest;
+use App\Http\Resources\CourseResource;
 use App\Models\Course;
+use App\Models\Department;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -13,39 +16,25 @@ class CourseController extends Controller
      */
     public function index()
     {
-        return Inertia::render('course/courses');
+        $courses = Course::with('department')->latest()->get();
+        $departments = Department::all();
+
+        return Inertia::render('course/courses', [
+            'courses' => CourseResource::collection($courses),
+            'departments' => $departments,
+        ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
+   
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(AddCourseRequest $request)
     {
-        //
-    }
+        Course::create($request->validated());
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Course $course)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Course $course)
-    {
-        //
+        return redirect()->back()->with('success', 'Course created successfully');
+       
     }
 
     /**

@@ -1,12 +1,11 @@
 import { usePage } from '@inertiajs/react';
 import { useEffect } from 'react';
-import { toast } from 'sonner'; // or react-hot-toast
+import { toast } from 'sonner';
 import { Toaster } from './ui/sonner';
 
 export default function ToastHandler() {
     const page = usePage();
 
-    // Ensure flash is always at least an empty object
     const flash = (page.props.flash ?? {}) as {
         success?: string;
         error?: string;

@@ -20,6 +20,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index'])->name('courses.index');
+        Route::post('/store', [CourseController::class, 'store'])->name('courses.store');
     });
 
     Route::prefix('subjects')->group(function () {
