@@ -31,6 +31,9 @@ Route::middleware(['auth'])->group(function () {
 
     Route::prefix('classes')->group(function () {
         Route::get('/', [ClassController::class, 'index'])->name('classes.index');
+        Route::post('/store', [ClassController::class, 'store'])->name('classes.store');
+        Route::patch('/update/{classSection}', [ClassController::class, 'update'])->name('classes.update');
+        Route::delete('/destroy/{classSection}', [ClassController::class, 'destroy'])->name('classes.destroy');
     });
 
     Route::prefix('departments')->group(function () {
