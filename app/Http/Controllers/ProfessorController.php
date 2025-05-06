@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ProfessorResource;
 use App\Models\Professor;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
@@ -13,7 +14,11 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        return Inertia::render('professors/professors');
+        $professors = Professor::with(['user', 'department'])->latest()->get();
+
+        return Inertia::render('professors/professors',[
+            'professors' => ProfessorResource::collection($professors),
+        ]);
     }
 
     /**
