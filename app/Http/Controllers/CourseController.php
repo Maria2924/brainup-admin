@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Course\AddCourseRequest;
+use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
 use App\Models\Department;
@@ -40,9 +41,11 @@ class CourseController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Course $course)
+    public function update(UpdateCourseRequest $request, Course $course)
     {
-        //
+        $course->update($request->validated());
+
+        return redirect()->back()->with('success', 'Course updated successfully');
     }
 
     /**
@@ -50,6 +53,7 @@ class CourseController extends Controller
      */
     public function destroy(Course $course)
     {
-        //
+        $course->delete();
+        return redirect()->back()->with('success', 'Course deleted successfully');
     }
 }

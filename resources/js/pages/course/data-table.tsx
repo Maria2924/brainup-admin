@@ -18,6 +18,7 @@ import { Input } from '@/components/ui/input';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 
 import AddCourse from '@/components/form/course/add-course';
+import DeleteCourse from '@/components/form/course/delete-course';
 import EditCourse from '@/components/form/course/edit-course';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlusSquare } from 'lucide-react';
@@ -32,10 +33,19 @@ export function DataTable<TData, TValue>({ columns, data, departments = [] }: Da
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [open, setOpen] = React.useState(false);
+    const [editOpen, setEditOpen] = React.useState(false);
+    const [selectedCourse, setSelectedCourse] = React.useState<TData | null>(null);
+    const [deleteOpen, setDeleteOpen] = React.useState(false);
+    const [courseToDelete, setCourseToDelete] = React.useState<{ id: number; course_name: string } | null>(null);
 
     function handleEditCourse(course: TData) {
-        // Handle edit course logic here
-        console.log('Edit course:', course);
+        setSelectedCourse(course);
+        setEditOpen(true);
+    }
+
+    function handleDeleteCourse(course: TData) {
+        setCourseToDelete(course as { id: number; course_name: string });
+        setDeleteOpen(true);
     }
 
     const table = useReactTable({
@@ -53,6 +63,7 @@ export function DataTable<TData, TValue>({ columns, data, departments = [] }: Da
         },
         meta: {
             handleEditCourse,
+            handleDeleteCourse,
         },
     });
 
@@ -134,7 +145,13 @@ export function DataTable<TData, TValue>({ columns, data, departments = [] }: Da
             </div>
 
             <AddCourse open={open} setOpen={setOpen} departments={departments} />
-            <EditCourse editOpen={false} setEditOpen={() => {}} />
+            <EditCourse editOpen={editOpen} setEditOpen={setEditOpen} departments={departments} course={selectedCourse} />
+            <DeleteCourse
+                deleteOpen={deleteOpen}
+                setDeleteOpen={setDeleteOpen}
+                courseToDelete={courseToDelete}
+                setCourseToDelete={setCourseToDelete}
+            />
         </div>
     );
 }

@@ -1,5 +1,5 @@
 import { useForm } from '@inertiajs/react';
-import { FormEventHandler } from 'react';
+import { FormEventHandler, useEffect } from 'react';
 
 import InputError from '@/components/input-error';
 import { Button } from '@/components/ui/button';
@@ -13,12 +13,17 @@ interface EditCourseProps {
     departments: any[];
     editOpen: boolean;
     setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
+    course: any | null;
 }
 
-export default function EditCourse({ editOpen, setEditOpen, departments }: EditCourseProps) {
-    // const departmentInput = useRef<HTMLInputElement>(null);
-    const { data, setData, processing, reset, post, errors, clearErrors } = useForm<
-        Required<{ course_name: string; course_code: string; description: string; department_id: number | null }>
+export default function EditCourse({ editOpen, setEditOpen, departments, course }: EditCourseProps) {
+    const { data, setData, processing, reset, patch, errors, clearErrors } = useForm<
+        Required<{
+            course_name: string;
+            course_code: string;
+            description: string;
+            department_id: number | null;
+        }>
     >({
         course_name: '',
         course_code: '',
@@ -26,12 +31,22 @@ export default function EditCourse({ editOpen, setEditOpen, departments }: EditC
         department_id: null,
     });
 
+    useEffect(() => {
+        if (course) {
+            setData({
+                course_name: course.course_name || '',
+                course_code: course.course_code || '',
+                description: course.description || '',
+                department_id: course.department_id || null,
+            });
+        }
+    }, [course]);
+
     const saveCourse: FormEventHandler = (e) => {
         e.preventDefault();
-        post(route('courses.store'), {
+        patch(route('courses.update', course.id), {
             preserveScroll: true,
             onSuccess: () => closeModal(),
-            // onError: () => departmentInput.current?.focus(),
             onFinish: () => reset(),
         });
     };
@@ -45,11 +60,11 @@ export default function EditCourse({ editOpen, setEditOpen, departments }: EditC
     return (
         <Dialog open={editOpen} onOpenChange={setEditOpen}>
             <DialogContent>
-                <DialogTitle>Add Course</DialogTitle>
+                <DialogTitle>Edit Course</DialogTitle>
 
                 <form className="space-y-6" onSubmit={saveCourse}>
                     <div className="grid gap-4">
-                        <Label htmlFor="department_name" className="sr-only">
+                        <Label htmlFor="course_name" className="sr-only">
                             Course Name
                         </Label>
                         <Input
@@ -71,6 +86,7 @@ export default function EditCourse({ editOpen, setEditOpen, departments }: EditC
                             placeholder="Course Code"
                         />
                         <InputError message={errors.course_code} />
+
                         <Input
                             id="description"
                             type="text"
@@ -80,19 +96,23 @@ export default function EditCourse({ editOpen, setEditOpen, departments }: EditC
                             placeholder="Description"
                         />
                         <InputError message={errors.description} />
+
                         <Select
+                            value={data.department_id !== null ? data.department_id.toString() : '__placeholder__'}
                             onValueChange={(value) => {
-                                setData('department_id', Number(value));
+                                if (value !== '__placeholder__') {
+                                    setData('department_id', Number(value));
+                                }
                             }}
                         >
                             <SelectTrigger>
                                 <SelectValue placeholder="Department" />
                             </SelectTrigger>
                             <SelectContent>
-                                <SelectItem value="__all__" disabled>
+                                <SelectItem value="__placeholder__" disabled>
                                     Select Department
                                 </SelectItem>
-                                {departments?.map((dept) => (
+                                {departments.map((dept) => (
                                     <SelectItem key={dept.id} value={dept.id.toString()}>
                                         {dept.department_name}
                                     </SelectItem>
@@ -111,7 +131,7 @@ export default function EditCourse({ editOpen, setEditOpen, departments }: EditC
                         </DialogClose>
 
                         <Button variant="default" disabled={processing} asChild>
-                            <button type="submit">Save Course</button>
+                            <button type="submit">Update Course</button>
                         </Button>
                     </DialogFooter>
                 </form>

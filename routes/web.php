@@ -21,6 +21,8 @@ Route::middleware(['auth'])->group(function () {
     Route::prefix('courses')->group(function () {
         Route::get('/', [CourseController::class, 'index'])->name('courses.index');
         Route::post('/store', [CourseController::class, 'store'])->name('courses.store');
+        Route::patch('/update/{course}', [CourseController::class, 'update'])->name('courses.update');
+        Route::delete('/destroy/{course}', [CourseController::class, 'destroy'])->name('courses.destroy');
     });
 
     Route::prefix('subjects')->group(function () {
