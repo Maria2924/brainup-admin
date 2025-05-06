@@ -6,7 +6,6 @@ use App\Http\Requests\Course\AddCourseRequest;
 use App\Http\Requests\Course\UpdateCourseRequest;
 use App\Http\Resources\CourseResource;
 use App\Models\Course;
-use App\Models\Department;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -17,12 +16,10 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::with('department')->latest()->get();
-        $departments = Department::all();
+        $courses = Course::latest()->get();
 
         return Inertia::render('course/courses', [
             'courses' => CourseResource::collection($courses),
-            'departments' => $departments,
         ]);
     }
 

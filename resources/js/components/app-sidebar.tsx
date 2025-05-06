@@ -12,11 +12,11 @@ const mainNavItems: NavItem[] = [
         href: '/dashboard',
         icon: LayoutGrid,
     },
-    {
-        title: 'Classes',
-        href: '/classes',
-        icon: BookCopy,
-    },
+    // {
+    //     title: 'Classes',
+    //     href: '/classes',
+    //     icon: BookCopy,
+    // },
     {
         title: 'Courses',
         href: '/courses',
@@ -28,11 +28,11 @@ const mainNavItems: NavItem[] = [
         href: '/subjects',
         icon: BookOpenCheckIcon,
     },
-    {
-        title: 'Departments',
-        href: '/departments',
-        icon: Group,
-    },
+    // {
+    //     title: 'Departments',
+    //     href: '/departments',
+    //     icon: Group,
+    // },
     {
         title: 'Professors',
         href: '/professors',

@@ -14,7 +14,7 @@ class ProfessorController extends Controller
      */
     public function index()
     {
-        $professors = Professor::with(['user', 'department'])->latest()->get();
+        $professors = Professor::with(['user'])->latest()->get();
 
         return Inertia::render('professors/professors',[
             'professors' => ProfessorResource::collection($professors),
