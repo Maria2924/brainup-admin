@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { getYearLabel } from '@/helper/getYearLabel';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, EyeIcon } from 'lucide-react';
 
@@ -9,7 +10,7 @@ export type Payment = {
     email: string;
     student_id_no: string;
     class: string;
-    year: string;
+    year: string | number;
 };
 
 export const columns: ColumnDef<Payment>[] = [
@@ -39,6 +40,10 @@ export const columns: ColumnDef<Payment>[] = [
     {
         accessorKey: 'year',
         header: 'Year',
+        cell: ({ row }) => {
+            const year = row.getValue('year');
+            return <span>{getYearLabel(year as string | number)}</span>;
+        },
     },
     {
         accessorKey: 'action',

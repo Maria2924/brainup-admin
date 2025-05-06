@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\ClassSection;
+namespace App\Http\Requests\Subject;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateClassSectionRequest extends FormRequest
+class AddSubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,9 +22,8 @@ class UpdateClassSectionRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'section_name' => 'required|string|max:255|unique:class,section_name,' . $this->route('classSection')?->id,
-            'course_id' => 'required|exists:courses,id',
-            'year' => 'required',
+            'name' =>  'required|string|max:255|unique:subjects,name',
+            'code' =>  'required|string|max:255|unique:subjects,code',
         ];
     }
 }

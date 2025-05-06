@@ -11,12 +11,12 @@ const breadcrumbs: BreadcrumbItem[] = [
     },
 ];
 
-export default function Subjects() {
+export default function Subjects({ subjects }: { subjects: any[] }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
             <Head title="Subjects" />
             <div className="flex h-full flex-1 flex-col gap-4 rounded-xl p-4">
-                <DataTable columns={columns} data={[]} />
+                <DataTable columns={columns} data={subjects} />
             </div>
         </AppLayout>
     );
