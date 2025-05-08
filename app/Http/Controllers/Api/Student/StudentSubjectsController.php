@@ -26,12 +26,12 @@ class StudentSubjectsController extends Controller
             return response()->json(['error' => 'Student not found'], 404);
         }
 
-      $subjects = Subject::select('subjects.*', 'users.name as professor_name')
-        ->join('class_subjects', 'subjects.id', '=', 'class_subjects.subject_id')
-        ->join('professors', 'class_subjects.professor_id', '=', 'professors.id')
-        ->join('users', 'professors.user_id', '=', 'users.id')
-        ->where('class_subjects.class_id', $student->class_id)
-        ->get();
+        $subjects = Subject::select('subjects.*', 'users.name as professor_name')
+          ->join('student_subjects', 'subjects.id', '=', 'student_subjects.subject_id')
+          ->join('professors', 'subjects.professor_id', '=', 'professors.id')
+          ->join('users', 'professors.user_id', '=', 'users.id')
+          ->where('student_subjects.student_id', $student->id)
+          ->get();
 
 
         return response()->json(StudentSubjectsResource::collection($subjects));

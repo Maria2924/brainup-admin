@@ -19,6 +19,7 @@ class SubjectsTableSeeder extends Seeder
             Subject::create([
                 'name' => $faker->unique()->word(5),
                 'code' => $faker->unique()->word(5),
+                'professor_id' => $faker->numberBetween(1, 10),
             ]);
         }
     }

@@ -30,18 +30,13 @@ class DatabaseSeeder extends Seeder
             UsersTableSeeder::class,
             StudentsTableSeeder::class,
             ProfessorsTableSeeder::class,
-            DepartmentsTableSeeder::class,
             CoursesTableSeeder::class,
-            CourseClassesTableSeeder::class,
-            ClassesTableSeeder::class,
             SubjectsTableSeeder::class,
             SubjectModulesTableSeeder::class,
             SubjectActivitiesTableSeeder::class,
-            // SubjectProfessorsTableSeeder::class,
-            ClassSubjectsTableSeeder::class,
-            StudentExtraSubjectsTableSeeder::class,
             SubjectActivityQuestionsTableSeeder::class,
             StudentActivityAnswersTableSeeder::class,
+            StudentSubjectsTableSeeder::class,
         ]);
     }
 }

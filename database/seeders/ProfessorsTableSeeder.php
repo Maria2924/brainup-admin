@@ -14,7 +14,6 @@ class ProfessorsTableSeeder extends Seeder
         foreach (range(1, 10) as $index) {
             DB::table('professors')->insert([
                 'user_id' => $faker->numberBetween(1, 10),
-                'department_id' => $faker->numberBetween(1, 5),
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);
