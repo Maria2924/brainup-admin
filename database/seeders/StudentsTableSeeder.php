@@ -15,7 +15,6 @@ class StudentsTableSeeder extends Seeder
             DB::table('students')->insert([
                 'user_id' => $index + 11,
                 'student_id_no' => $faker->unique()->numberBetween(10000000, 99999999),
-                'class_id' => $faker->numberBetween(1, 15),
                 'year' => $faker->numberBetween(1, 4),
                 'created_at' => now(),
                 'updated_at' => now(),

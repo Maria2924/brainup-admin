@@ -21,8 +21,6 @@ Route::middleware('auth:sanctum')->post('/logout', [LoginController::class, 'log
 
 Route::middleware(['auth:sanctum', RoleMiddleware::class . ':student'])->group(function () {
     Route::get('/student/subjects', [StudentSubjectsController::class, 'index']);
-    Route::get('/student/extra-subjects', [StudentExtraSubjectsController::class, 'index']);
-
     Route::get('/student/subject-modules', [StudentSubjectModulesController::class, 'index']);
     Route::get('/student/subject-activities', [StudentClassSubjectActivitiesController::class, 'index']);
     Route::get('/student/subject-activity-questions', [StudentClassSubjectActivityQuestionsController::class, 'index']);

@@ -11,7 +11,6 @@ class Professor extends Model
 
     protected $fillable = [
         'user_id',
-        'department_id',
     ];
 
     public function user()

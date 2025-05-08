@@ -16,7 +16,6 @@ return new class extends Migration
             $table->string('course_name');
             $table->string('course_code');
             $table->string('description');
-            $table->bigInteger('department_id');
             $table->timestamps();
         });
     }

@@ -4,10 +4,10 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StudentExtraSubject extends Model
+class StudentSubjects extends Model
 {
     //
-    protected $table = 'student_extra_subjects';
+    protected $table = 'student_subjects';
 
     protected $fillable = [
         'student_id',
