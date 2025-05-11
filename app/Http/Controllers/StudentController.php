@@ -14,7 +14,7 @@ class StudentController extends Controller
      */
     public function index()
     {
-        $students = Student::with(['class', 'user'])->get();
+        $students = Student::with(['user'])->get();
 
         return Inertia::render('students/students', [
             'students' => StudentResource::collection($students),

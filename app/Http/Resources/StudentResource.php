@@ -21,7 +21,6 @@ class StudentResource extends JsonResource
             'name' => $this->user->name,
             'email' => $this->user->email,
             'year' => $this->year,
-            'class' => $this->class->section_name,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];
