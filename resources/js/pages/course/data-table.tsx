@@ -20,16 +20,14 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import AddCourse from '@/components/form/course/add-course';
 import DeleteCourse from '@/components/form/course/delete-course';
 import EditCourse from '@/components/form/course/edit-course';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { PlusSquare } from 'lucide-react';
 
 interface DataTableProps<TData, TValue> {
     columns: ColumnDef<TData, TValue>[];
     data: TData[];
-    departments: any[];
 }
 
-export function DataTable<TData, TValue>({ columns, data, departments = [] }: DataTableProps<TData, TValue>) {
+export function DataTable<TData, TValue>({ columns, data }: DataTableProps<TData, TValue>) {
     const [sorting, setSorting] = React.useState<SortingState>([]);
     const [columnFilters, setColumnFilters] = React.useState<ColumnFiltersState>([]);
     const [open, setOpen] = React.useState(false);
@@ -76,24 +74,6 @@ export function DataTable<TData, TValue>({ columns, data, departments = [] }: Da
                     onChange={(event) => table.setGlobalFilter(event.target.value)}
                     className="max-w-sm"
                 />
-
-                <Select
-                    onValueChange={(value) => {
-                        table.getColumn('department_name')?.setFilterValue(value === '__all__' ? undefined : value);
-                    }}
-                >
-                    <SelectTrigger className="ml-2 w-[200px]">
-                        <SelectValue placeholder="Filter by department..." />
-                    </SelectTrigger>
-                    <SelectContent>
-                        <SelectItem value="__all__">All Department</SelectItem>
-                        {departments?.map((dept) => (
-                            <SelectItem key={dept.id} value={dept.department_name}>
-                                {dept.department_name}
-                            </SelectItem>
-                        ))}
-                    </SelectContent>
-                </Select>
 
                 <Button variant="default" size="lg" className="ml-auto" onClick={() => setOpen(true)}>
                     <PlusSquare /> Add Course
@@ -144,8 +124,8 @@ export function DataTable<TData, TValue>({ columns, data, departments = [] }: Da
                 </Button>
             </div>
 
-            <AddCourse open={open} setOpen={setOpen} departments={departments} />
-            <EditCourse editOpen={editOpen} setEditOpen={setEditOpen} departments={departments} course={selectedCourse} />
+            <AddCourse open={open} setOpen={setOpen} />
+            <EditCourse editOpen={editOpen} setEditOpen={setEditOpen} course={selectedCourse} />
             <DeleteCourse
                 deleteOpen={deleteOpen}
                 setDeleteOpen={setDeleteOpen}

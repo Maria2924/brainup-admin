@@ -27,10 +27,10 @@ export const columns: ColumnDef<Payment>[] = [
         accessorKey: 'email',
         header: 'Email',
     },
-    {
-        accessorKey: 'department',
-        header: 'Department',
-    },
+    // {
+    //     accessorKey: 'department',
+    //     header: 'Department',
+    // },
     {
         accessorKey: 'status',
         header: 'Status',

@@ -1,7 +1,6 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
-import { getYearLabel } from '@/helper/getYearLabel';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Cog, Edit, EyeIcon, Trash } from 'lucide-react';
 
@@ -34,17 +33,22 @@ export const columns: ColumnDef<Payment>[] = [
         header: 'Student ID No',
     },
     {
-        accessorKey: 'class',
-        header: 'Class',
-    },
-    {
-        accessorKey: 'year',
-        header: 'Year',
+        accessorKey: 'status',
+        header: 'Status',
         cell: ({ row }) => {
-            const year = row.getValue('year');
-            return <span>{getYearLabel(year as string | number)}</span>;
+            const status = row.getValue('status') as string;
+            const color = status === 'active' ? 'text-green-500' : 'text-red-500';
+            return <span className={`font-medium ${color}`}>{status}</span>;
         },
     },
+    // {
+    //     accessorKey: 'year',
+    //     header: 'Year',
+    //     cell: ({ row }) => {
+    //         const year = row.getValue('year');
+    //         return <span>{getYearLabel(year as string | number)}</span>;
+    //     },
+    // },
     {
         accessorKey: 'action',
         header: 'Action',

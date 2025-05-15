@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Controllers\ClassController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\ProfessorController;
 use App\Http\Controllers\StudentController;
@@ -31,13 +30,7 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{subject}', [SubjectController::class, 'destroy'])->name('subjects.destroy');
     });
 
-    Route::prefix('classes')->group(function () {
-        Route::get('/', [ClassController::class, 'index'])->name('classes.index');
-        Route::post('/store', [ClassController::class, 'store'])->name('classes.store');
-        Route::patch('/update/{classSection}', [ClassController::class, 'update'])->name('classes.update');
-        Route::delete('/destroy/{classSection}', [ClassController::class, 'destroy'])->name('classes.destroy');
-    });
-
+ 
     Route::prefix('professors')->group(function () {
         Route::get('/', [ProfessorController::class, 'index'])->name('professors.index');
     });

@@ -7,16 +7,14 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from '@/components/ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface EditCourseProps {
-    departments: any[];
     editOpen: boolean;
     setEditOpen: React.Dispatch<React.SetStateAction<boolean>>;
     course: any | null;
 }
 
-export default function EditCourse({ editOpen, setEditOpen, departments, course }: EditCourseProps) {
+export default function EditCourse({ editOpen, setEditOpen, course }: EditCourseProps) {
     const { data, setData, processing, reset, patch, errors, clearErrors } = useForm<
         Required<{
             course_name: string;
@@ -96,31 +94,6 @@ export default function EditCourse({ editOpen, setEditOpen, departments, course 
                             placeholder="Description"
                         />
                         <InputError message={errors.description} />
-
-                        <Select
-                            value={data.department_id !== null ? data.department_id.toString() : '__placeholder__'}
-                            onValueChange={(value) => {
-                                if (value !== '__placeholder__') {
-                                    setData('department_id', Number(value));
-                                }
-                            }}
-                        >
-                            <SelectTrigger>
-                                <SelectValue placeholder="Department" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="__placeholder__" disabled>
-                                    Select Department
-                                </SelectItem>
-                                {departments.map((dept) => (
-                                    <SelectItem key={dept.id} value={dept.id.toString()}>
-                                        {dept.department_name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-
-                        <InputError message={errors.department_id} />
                     </div>
 
                     <DialogFooter className="gap-2">

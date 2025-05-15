@@ -39,11 +39,6 @@ export const columns: ColumnDef<Course>[] = [
         header: 'Description',
     },
     {
-        accessorKey: 'department_name',
-        header: 'Department Name',
-        cell: ({ row }) => row.getValue('department_name'),
-    },
-    {
         accessorKey: 'action',
         header: 'Action',
         cell: ({ row, table }) => (
