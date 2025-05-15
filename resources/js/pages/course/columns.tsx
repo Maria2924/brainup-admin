@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { formatCourseDuration } from '@/helper/formatDuration';
 import { ColumnDef } from '@tanstack/react-table';
 import { ArrowUpDown, Edit, Trash } from 'lucide-react';
 
@@ -37,6 +38,22 @@ export const columns: ColumnDef<Course>[] = [
     {
         accessorKey: 'description',
         header: 'Description',
+    },
+    {
+        accessorKey: 'duration',
+        header: 'Duration',
+        cell: ({ row }) => {
+            const duration = row.getValue('duration');
+            return <span>{formatCourseDuration(Number(duration))}</span>;
+        },
+    },
+    {
+        accessorKey: 'course_level',
+        header: 'Course Level',
+    },
+    {
+        accessorKey: 'status',
+        header: 'Status',
     },
     {
         accessorKey: 'action',
