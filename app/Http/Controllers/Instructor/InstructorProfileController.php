@@ -8,7 +8,8 @@ use Inertia\Inertia;
 
 class InstructorProfileController extends Controller
 {
-    public function index()
+
+    public function edit(Request $request)
     {
         $user = auth()->user();
         return Inertia::render('user_dashboards/Instructors/profile/profile', [

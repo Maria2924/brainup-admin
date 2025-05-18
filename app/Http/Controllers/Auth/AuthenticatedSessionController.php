@@ -42,6 +42,8 @@ class AuthenticatedSessionController extends Controller
                 return redirect()->route('dashboard'); // Shared route for admin and superadmin
             case 'instructor':
                 return redirect()->route('instructor.dashboard');
+            // case 'student':
+            //     return redirect()->route('student.dashboard');
             default:
                 return redirect()->route('login'); // Fallback if role is missing
         }
