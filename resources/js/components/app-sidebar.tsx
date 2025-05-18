@@ -9,7 +9,7 @@ import AppLogo from './app-logo';
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
         icon: LayoutGrid,
     },
     // {
@@ -19,7 +19,7 @@ const mainNavItems: NavItem[] = [
     // },
     {
         title: 'Courses',
-        href: '/courses',
+        href: '/admin/courses',
         icon: GraduationCap,
     },
 
@@ -35,13 +35,13 @@ const mainNavItems: NavItem[] = [
     // },
     {
         title: 'Instructors',
-        href: '/instructors',
+        href: '/admin/instructors',
         icon: UsersRound,
     },
 
     {
         title: 'Students',
-        href: '/students',
+        href: '/admin/students',
         icon: BookUser,
     },
 ];
@@ -66,7 +66,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href="/admin/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>
