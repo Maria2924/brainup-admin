@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('course_progress', function (Blueprint $table) {
+        Schema::create('course_lesson_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('enrollment_id')->constrained('course_enrollments')->cascadeOnDelete();
             $table->foreignId('lesson_id')->constrained('course_lessons')->cascadeOnDelete();
-            $table->timestamp('completed_at')->nullable();
-            $table->integer('progress')->default(0);
-            $table->integer('total_lessons')->default(0);
-            $table->integer('total_completed_lessons')->default(0);
+            $table->string('question')->nullable();
+            $table->string('answer')->nullable();
+            $table->enum('type', ['single_choice', 'multiple_choice', 'true_false', 'short_answer', 'long_answer'])->default('short_answer');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('course_progress');
+        Schema::dropIfExists('course_lesson_questions');
     }
 };

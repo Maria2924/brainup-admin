@@ -34,8 +34,8 @@ const mainNavItems: NavItem[] = [
     //     icon: Group,
     // },
     {
-        title: 'Professors',
-        href: '/professors',
+        title: 'Instructors',
+        href: '/instructors',
         icon: UsersRound,
     },
 
