@@ -3,13 +3,13 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookOpen, BookUser, Folder, GraduationCap, LayoutGrid, UsersRound } from 'lucide-react';
-import AppLogo from './app-logo';
+import { BookOpen, BookUser, Folder, GraduationCap, LayoutGrid, UserRoundIcon } from 'lucide-react';
+import AppLogo from '../app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/admin/dashboard',
+        href: '/instructor/dashboard',
         icon: LayoutGrid,
     },
     // {
@@ -19,7 +19,7 @@ const mainNavItems: NavItem[] = [
     // },
     {
         title: 'Courses',
-        href: '/admin/courses',
+        href: '/instructor/courses',
         icon: GraduationCap,
     },
 
@@ -33,16 +33,16 @@ const mainNavItems: NavItem[] = [
     //     href: '/departments',
     //     icon: Group,
     // },
-    {
-        title: 'Instructors',
-        href: '/admin/instructors',
-        icon: UsersRound,
-    },
+    // {
+    //     title: 'Instructors',
+    //     href: '/instructors',
+    //     icon: UsersRound,
+    // },
 
     {
-        title: 'Students',
-        href: '/admin/students',
-        icon: BookUser,
+        title: 'Profile',
+        href: '/instructor/profile',
+        icon: UserRoundIcon,
     },
 ];
 
@@ -66,7 +66,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/admin/dashboard" prefetch>
+                            <Link href="/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

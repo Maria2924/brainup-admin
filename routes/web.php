@@ -1,16 +1,32 @@
 <?php
 
-use App\Http\Controllers\CourseController;
-use App\Http\Controllers\InstructorsController;
-use App\Http\Controllers\StudentController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
+use App\Http\Middleware\RoleMiddleware;
+
+//Admin Routes
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\StudentController;
+use App\Http\Controllers\InstructorsController;
+
+
+//Instructor Routes
+use App\Http\Controllers\Instructor\InstructorDashboardController;
+use App\Http\Controllers\Instructor\InstructorProfileController;
 
 Route::get('/', function () {   
     return Inertia::render('welcome');
 })->name('home');
 
-Route::middleware(['auth'])->group(function () {
+Route::get('/login', function () {
+    return Inertia::render('auth/login');
+})->name('login');
+
+Route::get('/register', function () {
+    return Inertia::render('auth/register');
+})->name('register');
+
+Route::prefix('admin')->middleware(['auth', 'verified', RoleMiddleware::class . ':admin'])->group(function () {
     Route::get('dashboard', function () {
         return Inertia::render('dashboard');
     })->name('dashboard');
@@ -36,7 +52,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('/destroy/{student}', [StudentController::class, 'destroy'])->name('students.destroy');
     });
 
- 
+});
+
+Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::class . ':instructor'])->group(function () {
+    // Instructor Dashboard Routes
+    Route::get('dashboard', [InstructorDashboardController::class, 'index'])->name('instructor.dashboard');
+    Route::get('profile', [InstructorProfileController::class, 'index'])->name('instructor.profile');
 });
 
 require __DIR__ . '/settings.php';
