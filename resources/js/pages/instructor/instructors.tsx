@@ -7,22 +7,23 @@ import { DataTable } from './data-table';
 
 const breadcrumbs: BreadcrumbItem[] = [
     {
-        title: 'Professors',
-        href: '/professors',
+        title: 'Instructors',
+        href: '/instructors',
     },
 ];
 
-interface ProfessorsData {
+interface InstructorsData {
     data: any[];
 }
 
-export default function Classes({ professors }: { professors: ProfessorsData }) {
+
+export default function Instructors({ instructors }: { instructors: InstructorsData }) {
     return (
         <AppLayout breadcrumbs={breadcrumbs}>
-            <Head title="Professors" />
+            <Head title="Instructors" />
 
             <MainLayout>
-                <DataTable columns={columns} data={professors.data} />
+                <DataTable columns={columns} data={instructors.data} />
             </MainLayout>
         </AppLayout>
     );

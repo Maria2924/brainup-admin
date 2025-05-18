@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('course_instructors', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('course_id');
-            $table->bigInteger('user_id');
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
         });
     }

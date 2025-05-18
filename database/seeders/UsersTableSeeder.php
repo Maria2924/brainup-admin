@@ -26,7 +26,7 @@ class UsersTableSeeder extends Seeder
                 'email_verified_at' => now(),
                 'password' => Hash::make('password'),
                 'status' => 'active',
-                'role' => $index <= 10 ? 'professor' : 'student',
+                'role' => $index <= 10 ? 'instructor' : 'student',
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),

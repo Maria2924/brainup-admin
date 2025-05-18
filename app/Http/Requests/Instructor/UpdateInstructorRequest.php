@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\Api;
+namespace App\Http\Requests\Instructor;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StudentClassCourses extends FormRequest
+class UpdateInstructorRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return (bool) $this->user() || $this->bearerToken() !== null;
+        return true;
     }
 
     /**
@@ -22,7 +22,9 @@ class StudentClassCourses extends FormRequest
     public function rules(): array
     {
         return [
-            'class_id' => 'required|exists:classes,id',
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:users,email',
+            'password' => 'required|string|min:8|confirmed',
         ];
     }
 }
