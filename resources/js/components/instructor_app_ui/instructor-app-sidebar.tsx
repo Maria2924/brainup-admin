@@ -39,11 +39,11 @@ const mainNavItems: NavItem[] = [
     //     icon: UsersRound,
     // },
 
-    {
-        title: 'Profile',
-        href: '/instructor/profile',
-        icon: UserRoundIcon,
-    },
+    // {
+    //     title: 'Profile',
+    //     href: '/instructor/profile',
+    //     icon: UserRoundIcon,
+    // },
 ];
 
 const footerNavItems: NavItem[] = [

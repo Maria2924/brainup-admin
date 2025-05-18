@@ -13,6 +13,7 @@ use App\Http\Controllers\InstructorsController;
 //Instructor Routes
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
+use App\Http\Controllers\Instructor\InstructorCoursesController;
 
 Route::get('/', function () {   
     return Inertia::render('welcome');
@@ -58,6 +59,7 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
     // Instructor Dashboard Routes
     Route::get('dashboard', [InstructorDashboardController::class, 'index'])->name('instructor.dashboard');
     Route::get('profile', [InstructorProfileController::class, 'index'])->name('instructor.profile');
+    Route::get('courses', [InstructorCoursesController::class, 'index'])->name('instructor.courses');
 });
 
 require __DIR__ . '/settings.php';
