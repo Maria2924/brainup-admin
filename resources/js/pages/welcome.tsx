@@ -4,6 +4,8 @@ import AOS from 'aos';
 
 import { type SharedData } from '@/types';
 import { Head, Link, usePage } from '@inertiajs/react';
+import AppLogo from '@/components/app-logo';
+import AppLogoIcon from '@/components/app-logo-icon';
 
 export default function Welcome() {
     const { auth } = usePage<SharedData>().props;
@@ -24,8 +26,17 @@ export default function Welcome() {
 
             <div className="flex min-h-screen flex-col bg-gradient-to-tl from-[#a309b8] to-[#0e7ce2] text-white dark:bg-[#0a0a0a] scroll-smooth">
                 {/* Navbar */}
-                <header className="flex justify-end px-6 py-6 lg:px-12">
+                
+                <header className="flex justify-between items-center px-6 py-6 lg:px-12">
+                    <Link href={route('dashboard')} className="flex items-center">
+                        <div className="rounded w-16 h-16 hover:bg-white/10 transition">
+                            <AppLogoIcon className="max-size-10 fill-current text-white dark:text-black" />
+                        </div>
+                        <div className="ml-2 text-lg font-semibold">Brain Up</div>
+                    </Link>
+                    
                     <nav className="space-x-4 text-sm font-semibold">
+                        
                         {auth.user ? (
                             <Link
                                 href={route('dashboard')}
