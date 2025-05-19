@@ -15,6 +15,9 @@ use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\Instructor\InstructorCoursesController;
 
+//Student Routes
+use App\Http\Controllers\Student\StudentDashboardController;
+
 Route::get('/', function () {   
     return Inertia::render('welcome');
 })->name('home');
@@ -60,6 +63,13 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
     Route::get('dashboard', [InstructorDashboardController::class, 'index'])->name('instructor.dashboard');
     Route::get('profile', [InstructorProfileController::class, 'index'])->name('instructor.profile');
     Route::get('courses', [InstructorCoursesController::class, 'index'])->name('instructor.courses');
+});
+
+Route::prefix('student')->middleware(['auth', 'verified', RoleMiddleware::class . ':student'])->group(function () {
+    // Student Dashboard Routes
+    Route::get('dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
+    Route::get('profile', [StudentProfileController::class, 'index'])->name('student.profile');
+    // Route::get('courses', [StudentCoursesController::class, 'index'])->name('student.courses');
 });
 
 require __DIR__ . '/settings.php';

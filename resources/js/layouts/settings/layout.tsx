@@ -43,6 +43,25 @@ const instructorSidebarNavItems: NavItem[] = [
     },
 ];
 
+
+const studentSidebarNavItems: NavItem[] = [
+    {
+        title: 'Profile',
+        href: '/student/settings/profile',
+        icon: null,
+    },
+    {
+        title: 'Password',
+        href: '/student/settings/password',
+        icon: null,
+    },
+    {
+        title: 'Appearance',
+        href: '/student/settings/appearance',
+        icon: null,
+    },
+];
+
 export default function SettingsLayout({ children }: PropsWithChildren) {
     // When server-side rendering, we only render the layout on the client...
     if (typeof window === 'undefined') {
@@ -73,7 +92,8 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                     {item.title}
                                 </Link>
                             </Button>
-                        )) : instructorSidebarNavItems.map((item, index) => (
+                        )) : null}
+                        { auth.user.role === 'instructor' ? instructorSidebarNavItems.map((item, index) => (
                             <Button
                                 key={`${item.href}-${index}`}
                                 size="sm"
@@ -87,7 +107,22 @@ export default function SettingsLayout({ children }: PropsWithChildren) {
                                     {item.title}
                                 </Link>
                             </Button>
-                        ))}
+                        )) : null}
+                        {auth.user.role === 'student' ? studentSidebarNavItems.map((item, index) => (
+                            <Button
+                                key={`${item.href}-${index}`}
+                                size="sm"
+                                variant="ghost"
+                                asChild
+                                className={cn('w-full justify-start', {
+                                    'bg-muted': currentPath === item.href,
+                                })}
+                            >
+                                <Link href={item.href} prefetch>
+                                    {item.title}
+                                </Link>
+                            </Button>
+                        )) : null} 
                     </nav>
                 </aside>
 
