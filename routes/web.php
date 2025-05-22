@@ -62,7 +62,14 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
     // Instructor Dashboard Routes
     Route::get('dashboard', [InstructorDashboardController::class, 'index'])->name('instructor.dashboard');
     Route::get('profile', [InstructorProfileController::class, 'index'])->name('instructor.profile');
-    Route::get('courses', [InstructorCoursesController::class, 'index'])->name('instructor.courses');
+    Route::prefix('courses')->group(function () {
+        Route::get('/', [InstructorCoursesController::class, 'index'])->name('instructor.courses');
+        Route::get('/create', [InstructorCoursesController::class, 'create'])->name('instructor.courses.create');
+        Route::post('/store', [InstructorCoursesController::class, 'store'])->name('instructor.courses.store');
+        Route::get('/{course}/show', [InstructorCoursesController::class, 'show'])->name('instructor.courses.show');
+        Route::patch('/update/{course}', [InstructorCoursesController::class, 'update'])->name('instructor.courses.update');
+        Route::delete('/destroy/{course}', [InstructorCoursesController::class, 'destroy'])->name('instructor.courses.destroy');
+    });
 });
 
 Route::prefix('student')->middleware(['auth', 'verified', RoleMiddleware::class . ':student'])->group(function () {
