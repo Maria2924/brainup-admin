@@ -15,13 +15,8 @@ class Course extends Model
         'description',
     ];
 
-    public function classes()
+    public function courseLessons()
     {
-        return $this->hasMany(Classes::class);
-    }
-
-    public function department()
-    {
-        return $this->belongsTo(Department::class, 'department_id');
+        return $this->hasMany(CourseLesson::class);
     }
 }
