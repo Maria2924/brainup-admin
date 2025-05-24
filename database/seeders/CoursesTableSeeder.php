@@ -31,7 +31,7 @@ class CoursesTableSeeder extends Seeder
                 'course_code' => $courseCodes[$index - 1],
                 'description' => $faker->sentence,
                 'course_level' => 'beginner',
-                'status' => 'draft',
+                'status' => 'published',
                 'created_at' => now(),
                 'updated_at' => now(),
             ]);

@@ -7,4 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 class Category extends Model
 {
     //
+    protected $fillable = [
+        'name',
+    ];
+
+    public function course()
+    {
+        return $this->belongsToMany(Course::class, 'course_categories', 'category_id', 'course_id');
+    }
+
 }

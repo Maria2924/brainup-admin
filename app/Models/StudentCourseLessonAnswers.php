@@ -4,13 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class CourseEnrollment extends Model
+class StudentCourseLessonAnswers extends Model
 {
     //
     protected $fillable = [
         'user_id',
         'course_id',
-        'enrolled_at',
+        'lesson_id',
+        'question_id',
+        'answer',
     ];
 
     public function user()
@@ -21,5 +23,15 @@ class CourseEnrollment extends Model
     public function course()
     {
         return $this->belongsTo(Course::class);
+    }
+
+    public function lesson()    
+    {
+        return $this->belongsTo(CourseLesson::class);
+    }
+
+    public function question()
+    {
+        return $this->belongsTo(CourseLessonQuestions::class);
     }
 }
