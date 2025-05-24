@@ -14,7 +14,6 @@ interface Course {
     id: number;
     title: string;
     code: string;
-    semester: string;
 }
 
 interface Props {

@@ -1,7 +1,8 @@
 import { Head, Link } from '@inertiajs/react';
 import AppLayout from '@/layouts/instructor-app-layout';
 import { type BreadcrumbItem } from '@/types';
-import { Plus } from 'lucide-react';
+import { Pencil, Plus } from 'lucide-react';
+import { LessonsContainer } from './partials/LessonsContainer';
 
 interface Course {
     id: number;
@@ -16,6 +17,7 @@ interface CourseShowProps {
 }
 
 export default function CourseShow({ course }: CourseShowProps) {
+    
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Course Management',
@@ -64,15 +66,8 @@ export default function CourseShow({ course }: CourseShowProps) {
                         Add Lesson
                     </Link>
                 </div>
-                <div className='grid grid-cols-2 gap-6 mt-6 bg-gray-100 p-6 rounded-lg'>
-                { course?.lessons && course?.lessons.map((lesson: any) => (
-                    <div key={lesson.id}>
-                        <h3 className="text-lg font-medium text-gray-900">{lesson.lesson_name}</h3>
-                        <p className="mt-1 text-sm text-gray-600">{lesson.lesson_description}</p>
-                    </div>
-                )) || (
-                    <p>No lessons found</p>
-                )}
+                <div className='grid grid-cols-1 gap-6 mt-6 bg-gray-100 px-6 py-3 rounded-lg'>
+                <LessonsContainer course={course} />
                 </div>
             </div>
         </AppLayout>

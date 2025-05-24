@@ -75,7 +75,7 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
 Route::prefix('student')->middleware(['auth', 'verified', RoleMiddleware::class . ':student'])->group(function () {
     // Student Dashboard Routes
     Route::get('dashboard', [StudentDashboardController::class, 'index'])->name('student.dashboard');
-    Route::get('profile', [StudentProfileController::class, 'index'])->name('student.profile');
+    // Route::get('profile', [StudentProfileController::class, 'index'])->name('student.profile');
     // Route::get('courses', [StudentCoursesController::class, 'index'])->name('student.courses');
 });
 

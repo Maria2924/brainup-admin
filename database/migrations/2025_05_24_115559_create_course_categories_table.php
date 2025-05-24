@@ -9,15 +9,16 @@ return new class extends Migration
     /**
      * Run the migrations.
      */
-    public function up(): void
+      public function up(): void
     {
         Schema::create('course_categories', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('category_id')->after('course_id')->nullable();
-            $table->bigInteger('course_id')->unsigned();
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('course_id')->constrained('courses')->cascadeOnDelete();
             $table->timestamps();
         });
     }
+
 
     /**
      * Reverse the migrations.

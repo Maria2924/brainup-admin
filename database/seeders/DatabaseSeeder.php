@@ -29,6 +29,13 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersTableSeeder::class,
             CoursesTableSeeder::class,
+            CategoriesTableSeeder::class,
+            CourseCategoriesTableSeeder::class,
+            CourseLessonsTableSeeder::class,
+            CourseInstructorTableSeeder::class,
+            CourseLessonQuestionTableSeeder::class,
+            StudentEnrolledCoursesTableSeeder::class,
+            StudentCourseLessonsAnswersTableSeeder::class,
         ]);
     }
 }

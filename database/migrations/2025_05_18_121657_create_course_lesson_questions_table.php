@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignId('lesson_id')->constrained('course_lessons')->cascadeOnDelete();
             $table->string('question')->nullable();
+            $table->json('options')->nullable(); // only if has choices
             $table->string('answer')->nullable();
             $table->enum('type', ['single_choice', 'multiple_choice', 'true_false', 'short_answer', 'long_answer'])->default('short_answer');
             $table->timestamps();
