@@ -14,6 +14,8 @@ use App\Http\Controllers\InstructorsController;
 use App\Http\Controllers\Instructor\InstructorDashboardController;
 use App\Http\Controllers\Instructor\InstructorProfileController;
 use App\Http\Controllers\Instructor\InstructorCoursesController;
+use App\Http\Controllers\Instructor\InstructorCourseLessonsController;
+use App\Http\Controllers\Instructor\InstructorCourseLessonsQuestionsController;
 
 //Student Routes
 use App\Http\Controllers\Student\StudentDashboardController;
@@ -69,6 +71,19 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
         Route::get('/{course}/show', [InstructorCoursesController::class, 'show'])->name('instructor.courses.show');
         Route::patch('/update/{course}', [InstructorCoursesController::class, 'update'])->name('instructor.courses.update');
         Route::delete('/destroy/{course}', [InstructorCoursesController::class, 'destroy'])->name('instructor.courses.destroy');
+        
+        // Course Lessons Routes
+        Route::get('{course}/lesson/{lesson}/show', [InstructorCourseLessonsController::class, 'showCourseLesson'])->name('instructor.course.lesson.showCourseLesson');
+        Route::get('{course}/lesson/create', [InstructorCourseLessonsController::class, 'create'])->name('instructor.course.lesson.create');
+        Route::post('{course}/lesson/store', [InstructorCourseLessonsController::class, 'store'])->name('instructor.course.lesson.store');
+        Route::patch('{course}/lesson/{lesson}/update', [InstructorCourseLessonsController::class, 'update'])->name('instructor.course.lesson.update');
+        Route::delete('{course}/lesson/{lesson}/destroy', [InstructorCourseLessonsController::class, 'destroy'])->name('instructor.course.lesson.destroy');
+
+        // Course Lesson Acitivity Routes
+        Route::post('{course}/lesson/{lesson}/question/{question}/update', [InstructorCourseLessonsQuestionsController::class, 'updateQuestion'])->name('instructor.course.lesson.question.update');
+        Route::post('{course}/lesson/{lesson}/question/store', [InstructorCourseLessonsQuestionsController::class, 'storeQuestion'])->name('instructor.course.lesson.question.store');
+        Route::delete('{course}/lesson/{lesson}/question/{question}/destroy', [InstructorCourseLessonsQuestionsController::class, 'destroyQuestion'])->name('instructor.course.lesson.question.destroy');
+    
     });
 });
 
