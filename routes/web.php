@@ -74,7 +74,6 @@ Route::prefix('instructor')->middleware(['auth', 'verified', RoleMiddleware::cla
         
         // Course Lessons Routes
         Route::get('{course}/lesson/{lesson}/show', [InstructorCourseLessonsController::class, 'showCourseLesson'])->name('instructor.course.lesson.showCourseLesson');
-        Route::get('{course}/lesson/create', [InstructorCourseLessonsController::class, 'create'])->name('instructor.course.lesson.create');
         Route::post('{course}/lesson/store', [InstructorCourseLessonsController::class, 'store'])->name('instructor.course.lesson.store');
         Route::patch('{course}/lesson/{lesson}/update', [InstructorCourseLessonsController::class, 'update'])->name('instructor.course.lesson.update');
         Route::delete('{course}/lesson/{lesson}/destroy', [InstructorCourseLessonsController::class, 'destroy'])->name('instructor.course.lesson.destroy');

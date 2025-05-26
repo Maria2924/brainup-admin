@@ -3,6 +3,9 @@ import AppLayout from '@/layouts/instructor-app-layout';
 import { type BreadcrumbItem } from '@/types';
 import { Pencil, Plus } from 'lucide-react';
 import { LessonsContainer } from './partials/LessonsContainer';
+import { AddLessonModal } from './partials/AddLessonModal';
+import { useState } from 'react';
+import { router } from '@inertiajs/react';
 
 interface Course {
     id: number;
@@ -17,7 +20,11 @@ interface CourseShowProps {
 }
 
 export default function CourseShow({ course }: CourseShowProps) {
-    
+    const [showModal, setShowModal] = useState(false);
+    const refetch = () => {
+            router.reload({ only: [ 'course'] });
+        };
+
     const breadcrumbs: BreadcrumbItem[] = [
         {
             title: 'Course Management',
@@ -61,13 +68,14 @@ export default function CourseShow({ course }: CourseShowProps) {
             <div className='p-10'>
                 <div className='flex justify-between items-baseline mb-6'>
                     <h2 className='text-2xl font-bold'>Lessons</h2>
-                    <Link href={`/instructor/courses/${course.id}/lessons/create`} className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition'>
+                    <button onClick={() => setShowModal(true)} className='bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition'>
                         <Plus className="inline-block w-4 h-4" />{" "}
                         Add Lesson
-                    </Link>
+                    </button>
                 </div>
                 <div className='grid grid-cols-1 gap-6 mt-6 bg-gray-100 px-6 py-3 rounded-lg'>
                 <LessonsContainer course={course} />
+                <AddLessonModal showModal={showModal} setShowModal={setShowModal} courseId={course.id} refetch={refetch} />
                 </div>
             </div>
         </AppLayout>
