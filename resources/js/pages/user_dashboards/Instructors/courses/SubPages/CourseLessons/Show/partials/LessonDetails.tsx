@@ -83,7 +83,7 @@ export const LessonDetails = ({ lesson, refetch }: LessonDetailsProps) => {
             </div>
 
             <Dialog open={open} onOpenChange={setOpen}>
-                <DialogTitle>Edit Lesson</DialogTitle>
+                {/* <DialogTitle>Edit Lesson</DialogTitle> */}
                 <DialogContent>
                     <form onSubmit={submit}>
                         <div className="space-y-4">

@@ -46,48 +46,41 @@ class InstructorCourseLessonsController extends Controller
         ]);
     }
 
-    public function create(CourseInstructor $course)
+    public function store(Request $request)
     {
-        $course = Course::with('courseLessons')->find($course->course_id);
-        
-        return Inertia::render('user_dashboards/Instructors/courses/SubPages/CourseLessons/Show/index', [
-            'breadcrumbs' => [
-                [
-                    'title' => 'Courses',
-                    'href' => route('instructor.courses.show', $course),
-                ],
-                [
-                    'title' => 'Create',
-                    'href' => '#',
-                ],
-            ],
-            'title' => 'Create Lesson',
-            'description' => 'Create Lesson',
-            'lessons' => $course->courseLessons,
-            'course' => $course,
-        ]);
-    }
+        $course = CourseInstructor::find($request->course_id);
 
-    public function store(Request $request, CourseInstructor $course)
-    {
-        $course = Course::with('courseLessons')->find($course->course_id);
-        
-        
-        return Inertia::render('user_dashboards/Instructors/courses/SubPages/CourseLessons/Show/index', [
-            'breadcrumbs' => [
-                [
-                    'title' => 'Courses',
-                    'href' => route('instructor.courses'),
-                ],
-                [
-                    'title' => 'Store',
-                    'href' => route('instructor.course.lesson.store', $course),
-                ],
-            ],
-            'title' => 'Store Lesson',
-            'description' => 'Store Lesson',
-            'lessons' => $course->courseLessons,
-            'course' => $course,
+        $errors = [];
+
+        if (!$course) {
+            $errors['course_id'] = 'Course not found';
+        }
+
+        if (empty($request->title)) {
+            $errors['title'] = 'Title is required';
+        }
+
+        if (empty($request->content)) {
+            $errors['content'] = 'Content is required';
+        }
+
+        if (!empty($errors)) {
+            return response()->json([
+                'message' => 'Validation error',
+                'errors' => $errors,
+            ], 422);
+        }
+
+        $lesson = CourseLesson::create([
+            'course_id' => $course->course_id,
+            'title' => $request->title,
+            'content' => $request->content,
+            'video_url' => $request->video_url,
+        ]);
+
+        return response()->json([
+            'message' => 'Lesson created successfully',
+            'lesson' => $lesson,
         ]);
     }
 
