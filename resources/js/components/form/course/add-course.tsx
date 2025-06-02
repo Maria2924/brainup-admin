@@ -7,15 +7,13 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
 import { Dialog, DialogClose, DialogContent, DialogFooter, DialogTitle } from '@/components/ui/dialog';
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 
 interface AddCourseProps {
     open: boolean;
     setOpen: React.Dispatch<React.SetStateAction<boolean>>;
-    departments: any[];
 }
 
-export default function AddCourse({ open, setOpen, departments }: AddCourseProps) {
+export default function AddCourse({ open, setOpen }: AddCourseProps) {
     // const departmentInput = useRef<HTMLInputElement>(null);
     const { data, setData, processing, reset, post, errors, clearErrors } = useForm<
         Required<{ course_name: string; course_code: string; description: string; department_id: number | null }>
@@ -80,27 +78,6 @@ export default function AddCourse({ open, setOpen, departments }: AddCourseProps
                             placeholder="Description"
                         />
                         <InputError message={errors.description} />
-                        <Select
-                            onValueChange={(value) => {
-                                setData('department_id', Number(value));
-                            }}
-                        >
-                            <SelectTrigger>
-                                <SelectValue placeholder="Department" />
-                            </SelectTrigger>
-                            <SelectContent>
-                                <SelectItem value="__all__" disabled>
-                                    Select Department
-                                </SelectItem>
-                                {departments?.map((dept) => (
-                                    <SelectItem key={dept.id} value={dept.id.toString()}>
-                                        {dept.department_name}
-                                    </SelectItem>
-                                ))}
-                            </SelectContent>
-                        </Select>
-
-                        <InputError message={errors.department_id} />
                     </div>
 
                     <DialogFooter className="gap-2">

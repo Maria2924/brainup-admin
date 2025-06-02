@@ -3,45 +3,45 @@ import { NavUser } from '@/components/nav-user';
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from '@/components/ui/sidebar';
 import { type NavItem } from '@/types';
 import { Link } from '@inertiajs/react';
-import { BookCopy, BookOpen, BookOpenCheckIcon, BookUser, Folder, GraduationCap, Group, LayoutGrid, UsersRound } from 'lucide-react';
+import { BookOpen, BookUser, Folder, GraduationCap, LayoutGrid, UsersRound } from 'lucide-react';
 import AppLogo from './app-logo';
 
 const mainNavItems: NavItem[] = [
     {
         title: 'Dashboard',
-        href: '/dashboard',
+        href: '/admin/dashboard',
         icon: LayoutGrid,
     },
-    {
-        title: 'Classes',
-        href: '/classes',
-        icon: BookCopy,
-    },
+    // {
+    //     title: 'Classes',
+    //     href: '/classes',
+    //     icon: BookCopy,
+    // },
     {
         title: 'Courses',
-        href: '/courses',
+        href: '/admin/courses',
         icon: GraduationCap,
     },
 
+    // {
+    //     title: 'Subjects',
+    //     href: '/subjects',
+    //     icon: BookOpenCheckIcon,
+    // },
+    // {
+    //     title: 'Departments',
+    //     href: '/departments',
+    //     icon: Group,
+    // },
     {
-        title: 'Subjects',
-        href: '/subjects',
-        icon: BookOpenCheckIcon,
-    },
-    {
-        title: 'Departments',
-        href: '/departments',
-        icon: Group,
-    },
-    {
-        title: 'Professors',
-        href: '/professors',
+        title: 'Instructors',
+        href: '/admin/instructors',
         icon: UsersRound,
     },
 
     {
         title: 'Students',
-        href: '/students',
+        href: '/admin/students',
         icon: BookUser,
     },
 ];
@@ -66,7 +66,7 @@ export function AppSidebar() {
                 <SidebarMenu>
                     <SidebarMenuItem>
                         <SidebarMenuButton size="lg" asChild>
-                            <Link href="/dashboard" prefetch>
+                            <Link href="admin/dashboard" prefetch>
                                 <AppLogo />
                             </Link>
                         </SidebarMenuButton>

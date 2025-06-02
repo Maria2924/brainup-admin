@@ -16,7 +16,9 @@ return new class extends Migration
             $table->string('course_name');
             $table->string('course_code');
             $table->string('description');
-            $table->bigInteger('department_id');
+            $table->string('course_level')->nullable();
+            $table->integer('duration')->default(0)->comment('Duration in minutes');
+            $table->enum('status', ['draft', 'published'])->default('draft');
             $table->timestamps();
         });
     }

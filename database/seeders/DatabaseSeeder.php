@@ -28,20 +28,14 @@ class DatabaseSeeder extends Seeder
         // Custom seeders
         $this->call([
             UsersTableSeeder::class,
-            StudentsTableSeeder::class,
-            ProfessorsTableSeeder::class,
-            DepartmentsTableSeeder::class,
             CoursesTableSeeder::class,
-            CourseClassesTableSeeder::class,
-            ClassesTableSeeder::class,
-            SubjectsTableSeeder::class,
-            SubjectModulesTableSeeder::class,
-            SubjectActivitiesTableSeeder::class,
-            // SubjectProfessorsTableSeeder::class,
-            ClassSubjectsTableSeeder::class,
-            StudentExtraSubjectsTableSeeder::class,
-            SubjectActivityQuestionsTableSeeder::class,
-            StudentActivityAnswersTableSeeder::class,
+            CategoriesTableSeeder::class,
+            CourseCategoriesTableSeeder::class,
+            CourseLessonsTableSeeder::class,
+            CourseInstructorTableSeeder::class,
+            CourseLessonQuestionTableSeeder::class,
+            StudentEnrolledCoursesTableSeeder::class,
+            StudentCourseLessonsAnswersTableSeeder::class,
         ]);
     }
 }

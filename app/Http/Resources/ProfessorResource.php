@@ -18,8 +18,6 @@ class ProfessorResource extends JsonResource
             'id' => $this->id,
             'name' => $this->user->name,
             'email' => $this->user->email,
-            'department' => $this->department?->department_name,
-            'department_id' => $this->department?->id,
             'status' => $this->user->status,
         ];
     }

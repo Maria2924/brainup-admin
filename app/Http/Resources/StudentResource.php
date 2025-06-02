@@ -17,11 +17,9 @@ class StudentResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'student_id_no' => $this->student_id_no,
-            'name' => $this->user->name,
-            'email' => $this->user->email,
-            'year' => $this->year,
-            'class' => $this->class->section_name,
+            'name' => $this->name,
+            'email' => $this->email,
+            'status' => $this->status,
             'created_at' => $this->created_at,
             'updated_at' => $this->updated_at,
         ];

@@ -13,16 +13,23 @@ class Course extends Model
         'course_name',
         'course_code',
         'description',
-        'department_id',
+        'course_level',
+        'duration',
+        'status',
     ];
 
-    public function classes()
+    public function courseLessons()
     {
-        return $this->hasMany(Classes::class);
+        return $this->hasMany(CourseLesson::class);
     }
 
-    public function department()
+    public function categories()
     {
-        return $this->belongsTo(Department::class, 'department_id');
+        return $this->belongsToMany(Category::class, 'course_categories', 'course_id', 'category_id');
+    }
+
+    public function enrollments()
+    {
+        return $this->hasMany(CourseEnrollment::class);
     }
 }

@@ -25,7 +25,6 @@ class AddCourseRequest extends FormRequest
             'course_name' => 'required|string|max:255',
             'course_code' => 'required|string|max:10|unique:courses,course_code',
             'description' => 'required|string|max:1000',
-            'department_id' => 'required|exists:departments,id',
         ];
     }
 }
